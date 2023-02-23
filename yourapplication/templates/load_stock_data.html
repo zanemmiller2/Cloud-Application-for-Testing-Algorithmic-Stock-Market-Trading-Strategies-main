@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Load Stock Data</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/w3.css">
+        <style>
+            body {
+                    font-family: "Times New Roman", Georgia, Serif;
+                    background-color: #ABBAEA;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              font-family: "Playfair Display";
+              letter-spacing: 5px;
+            }
+
+            .div-body-background {
+                background-color: #ABBAEA;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top">
+          <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <a class="w3-bar-item">LEAN UI</a>
+            <!-- Right-sided navbar links. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                {% for item in nav.top %}
+                    <a href="{{ item.url }}" class="w3-bar-item w3-button">{{ item.label }}</a>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="w3-padding-top-64 w3-margin-left">
+            <h2>Load and Update Stock Data</h2>
+        </div>
+
+        <!-- Start Content -->
+        <div class="w3-padding-top-32 w3-margin-left">
+            <form action="/stock-data-load" method="POST">
+                <h3>Data Options</h3>
+                <div>*Please enter tickers in comma separated list with no spaces</div>
+                <label for="tickers_to_load">Tickers to Load:</label>
+                <input type="text"
+                    id="tickers_to_load"
+                    name="tickers_to_load"
+                >
+                <div></div>
+                <label for="start_date">Start date:</label>
+                <input type="date" 
+                        id="start_date"
+                        name="start_date"
+                        value="2000-01-01" 
+                >
+
+                <label for="end_date">End date:</label>
+                <input type="date"
+                        id="end_date"
+                        name="end_date"
+                        value="2022-11-13"
+                >
+
+                <div></div>
+                <label for="overwrite_existing_data">Overwrite Existing Data</label>
+                <input type="checkbox"
+                        id="overwrite_existing_data"
+                        name="overwrite_existing_data">
+                <div></div>
+                <label for="data_to_alter_percent">% Data to Randomly Alter:</label>
+                <input type="number"
+                        id="data_to_alter_percent"
+                        name="data_to_alter_percent"
+                        placeholder="0"
+                        step="0.0001"
+                        min="0"
+                        max="100">
+                <label for="max_alter_percent">Max % to Alter Data By:</label>
+                <input type="number"
+                        id="max_alter_percent"
+                        name="max_alter_percent"
+                        placeholder="0"
+                        step="0.0001"
+                        min="0"
+                        max="100">
+                <div></div>
+
+                <button type="submit" formaction="/stock-data-load" method="POST">
+                    Load Data
+                </button>
+            </form>
+                    
+            </div>
+          </div>
+        </div>
+            {% if errors %}
+        <div>
+            {% for error in errors %}
+            <p>{{error}}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+    </body>
+</html>

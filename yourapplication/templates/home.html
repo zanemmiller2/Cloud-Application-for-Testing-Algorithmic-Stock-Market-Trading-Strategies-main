@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LEAN UI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/w3.css">
+    <style>
+        body {
+                font-family: "Times New Roman", Georgia, Serif;
+                background-color: #ABBAEA;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          font-family: "Playfair Display";
+          letter-spacing: 5px;
+        }
+
+        .div-body-background {
+            background-color: #ABBAEA;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a class="w3-bar-item">LEAN UI</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+        {% for item in nav.top %}
+            <a href="{{ item.url }}" class="w3-bar-item w3-button">{{ item.label }}</a>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:900px;min-width:500px" id="home">
+  <img class="w3-image" src="https://cdn.quantconnect.com/i/tu/view-live-results-1.png" alt="" width="1400" height="200">
+  <div class="div-body-background">
+    <h1 class="w3-xxlarge">QuantConnect Algorithms Testing Application</h1>
+  </div>
+</header>
+
+</body>
+</html>
+
+<!-- Brendan MacIntyre, James Duenas, Max Veregge, Vinh Tran, Zane Miller -->

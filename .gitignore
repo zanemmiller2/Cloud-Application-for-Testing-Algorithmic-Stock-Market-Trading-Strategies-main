@@ -1,0 +1,16 @@
+db_credentials.py
+db_credentials_max.py
+*.png
+/datasources/
+.DS_STORE
+.vscode
+*.pyc
+*/capstone_39_venv
+yourapplication/flask_app_venv
+yourapplication/projects/*
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+

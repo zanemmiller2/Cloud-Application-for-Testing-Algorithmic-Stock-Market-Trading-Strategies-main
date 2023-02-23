@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Upload Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/w3.css">
+        <style>
+            body {
+                    font-family: "Times New Roman", Georgia, Serif;
+                    background-color: #ABBAEA;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              font-family: "Playfair Display";
+              letter-spacing: 5px;
+            }
+
+            .div-body-background {
+                background-color: #ABBAEA;
+            }
+        </style>
+    </head>
+    <ul id="algorithm_listing"></ul>
+            <script type="text/javascript">
+                document.getElementById("filepicker").addEventListener("change", (event) => {
+                    let output = document.getElementById("algorithm_listing");
+                    for (const file of event.target.files) {
+                        let item = document.createElement("li");
+                        item.textContent = file.webkitRelativePath.substring(0, file.webkitRelativePath.indexOf('/'));
+                        output.appendChild(item);
+
+                    }}, false);
+        </script>
+    <body>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top">
+          <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <a class="w3-bar-item">LEAN UI</a>
+            <!-- Right-sided navbar links. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                {% for item in nav.top %}
+                    <a href="{{ item.url }}" class="w3-bar-item w3-button">{{ item.label }}</a>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="w3-padding-top-64 w3-margin-left">
+            <h2>Upload New Algorithm</h2>
+        </div>
+
+        <div class="w3-padding-top-32 w3-margin-left">
+            <form action="/create-project"
+                  method="POST"
+                  enctype="multipart/form-data">
+                <input type="file" id="algorithm_file" name="algorithm_file"
+                       directory=""/>
+                       
+                <input type="text"
+                       id="algorithm_project_name"
+                       name="algorithm_project_name"
+                       required
+                       placeholder="Unique Project Name"
+                       value="{{request.form.algorithm_project_name}}"/>
+                       
+                <input type="text"
+                       id="algorithm_id"
+                       name="algorithm_id"
+                       required
+                       placeholder="Algorithm ID"
+                       value="{{request.form.algorithm_id}}"/>
+                       
+                <select name="algorithm_language" id="algorithm_language">
+                    <option value="python">Python</option>
+                    <option value="csharp">C#</option>
+                </select>
+                
+                <input type="submit" value="Create New Project From Algorithm">
+            </form>
+
+        {% if error %}
+        <div>
+            <p>{{error}}</p>
+        </div>
+        {% endif %}
+        </div>
+    </body>
+</html>

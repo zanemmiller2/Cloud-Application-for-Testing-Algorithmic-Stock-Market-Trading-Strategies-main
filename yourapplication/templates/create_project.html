@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Project</title>
+
+
+    </head>
+    <body>
+        <h1>Create Project</h1>
+        <form action="/project-selector" method="POST">
+            <label for="projects">Project name:</label>
+            <select name="projects" id="projects">
+                {% for p in projects %}
+                <option value="{{p}}"> {{p}}</option>
+                {% endfor %}
+            </select>
+             <input type="submit" value="Run Project">
+                Run Project
+            </button>
+        </form>
+    </body>
+</html>

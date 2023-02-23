@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Run Backtest</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/w3.css">
+        <style>
+            body {
+                    font-family: "Times New Roman", Georgia, Serif;
+                    background-color: #ABBAEA;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              font-family: "Playfair Display";
+              letter-spacing: 5px;
+            }
+
+            .div-body-background {
+                background-color: #ABBAEA;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top">
+          <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <a class="w3-bar-item">LEAN UI</a>
+            <!-- Right-sided navbar links. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                {% for item in nav.top %}
+                    <a href="{{ item.url }}" class="w3-bar-item w3-button">{{ item.label }}</a>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="w3-padding-top-64 w3-margin-left">
+            <h2>Run The Selected Project</h2>
+        </div>
+
+        <!-- Start Content -->
+        <div class="w3-padding-top-32 w3-margin-left">
+            <form action="/project-selector" method="POST">
+                <h3>Backtest Options</h3>
+                <label for="projects">Choose a project:</label>
+                <select name="projects" id="projects">
+                    {% for p in projects %}
+                    <option value="{{p[1]}}"> {{p[0]}}</option>
+                    {% endfor %}
+                </select>
+                <div></div>
+                <label for="backtest_destination">Backtest Name:</label>
+                <input type="text"
+                       id="backtest_destination"
+                       name="backtest_destination"
+                       required>
+                </br>
+				</br>
+                <label for="tickers_to_load">Ticker:</label>
+                <input type="text"
+                    id="tickers_to_load"
+                    name="tickers_to_load"
+                >
+                <div></div>
+                <label for="start_date">Start date:</label>
+                <input type="date" 
+                        id="start_date"
+                        name="start_date"
+                       value="mm/dd/yyyy"
+                >
+
+                <label for="end_date">End date:</label>
+                <input type="date"
+                        id="end_date"
+                        name="end_date"
+                       value="mm/dd/yyyy"
+                >
+                </br>
+                </br>
+                <button type="submit" formaction="/project-selector" method="POST">
+                    Run Project
+                </button>
+            </form>
+                    
+            </div>
+          </div>
+        </div>
+            {% if error %}
+        <div>
+            <p>{{error}}</p>
+        </div>
+        {% endif %}
+        </div>
+    </body>
+</html>
